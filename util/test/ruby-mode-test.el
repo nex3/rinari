@@ -37,3 +37,18 @@ BAR
 <here-doc>
 BAZ
 <no-here-doc>"))
+
+(ert-deftest ruby-here-doc-p-crazy ()
+  (test-here-doc-p "
+<<FOO
+<here-doc>
+FOO
+<no-here-doc>
+<<BAR
+<here-doc>
+<<BAZ
+<here-doc>
+BAZ
+<here-doc>
+BAR
+<no-here-doc>"))

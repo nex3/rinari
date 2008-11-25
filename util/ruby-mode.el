@@ -1174,23 +1174,6 @@ See `add-log-current-defun-function'."
      (6 (7 . ?/)))
     ("^=en\\(d\\)\\_>" 1 "!")
     ("^\\(=\\)begin\\_>" 1 (ruby-comment-beg-syntax))
-    ;; Currently, the following case is highlighted incorrectly:
-    ;;
-    ;;   <<FOO
-    ;;   FOO
-    ;;   <<BAR
-    ;;   <<BAZ
-    ;;   BAZ
-    ;;   BAR
-    ;;
-    ;; This is because all here-doc beginnings are highlighted before any endings,
-    ;; so although <<BAR is properly marked as a beginning, when we get to <<BAZ
-    ;; it thinks <<BAR is part of a string so it's marked as well.
-    ;;
-    ;; This may be fixable by modifying ruby-in-here-doc-p to use
-    ;; ruby-in-non-here-doc-string-p rather than syntax-ppss-context,
-    ;; but I don't want to try that until we've got unit tests set up
-    ;; to make sure I don't break anything else.
     (,(concat ruby-here-doc-beg-re ".*\\(\n\\)")
      ,(+ 1 (regexp-opt-depth ruby-here-doc-beg-re))
      (ruby-here-doc-beg-syntax))
