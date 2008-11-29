@@ -5,12 +5,14 @@
 (load "ert/ert-functional")
 (load "../ruby-mode")
 
+(eval-when-compile (require 'cl))
+
 (defmacro with-ruby-buffer (contents &rest body)
   "Like `with-test-buffer', but sets the buffer to `ruby-mode'."
+  (declare (indent 1))
   `(with-test-buffer ,contents
      (ruby-mode)
      ,@body))
-(put 'with-ruby-buffer 'lisp-indent-function 1)
 
 (defmacro test-here-doc-p (contents)
   `(with-ruby-buffer ,contents
